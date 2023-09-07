@@ -3,17 +3,26 @@
 name: Apigee CICD Using Maven
 
 # Controls when the action will run. Workflow runs when manually triggered using the UI or API.
-#on:
-#  workflow_dispatch:
-
-#beloe command is deploy the code automatically when release version created and code merged  
-#on:
-#  release:
-#    types: [created]
-
-#beloe command is deploy the code automatically when push the code to specific branch
-on: push
-#branches: [ "release/dev" ]
+on:
+  workflow_dispatch:
+    inputs:
+      deployment-env:
+        type: choice
+        required: true
+        description: Environment to deploy
+        options:
+          - eval
+          - dev
+          - test
+          - uat
+          - stage
+          - prod
+      deployment-region:
+        type: choice
+        description: Region to deploy
+        options:
+          - esi-apigee-x-394004
+          - NA
 
 env:
   DEPLOYMENT_NAME: Apigee CICD Test # TODO: update to deployment name
@@ -75,7 +84,8 @@ jobs:
 
     # Maven Deploy uploaded proxy package in to Apigeee
       - name: mvn deploy proxy xhybrid
-        run: mvn apigee-enterprise:deploy -q -Pproxy_de -Denv=eval -Dbearer=${{ steps.auth.outputs.access_token }} -Dorg=esi-apigee-x-394004
+        run: mvn apigee-enterprise:deploy -q -Pproxy_de -Denv=eval -Dbearer=${{ steps.auth.outputs.access_token }}  -Dapigee.org=${{
+          github.event.inputs.deployment-region }} -Denv=${{github.event.inputs.deployment-env}} -Dapigee.config.dir=./apiconfig
 
     # # Maven Deploy Apigee Config
     #   - name: mvn deploy config xhybrid
