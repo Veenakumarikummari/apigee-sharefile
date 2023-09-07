@@ -74,18 +74,17 @@ jobs:
           workload_identity_provider: 'projects/127369686749/locations/global/workloadIdentityPools/pavan-apigee-git/providers/pavan-apigee-git'
           service_account: 'workload-identity-federation@esi-apigee-x-394004.iam.gserviceaccount.com'
 
-    # Maven Package & Upload Apigee proxy
+     # Maven Package & Upload Apigee proxy
       - name: mvn package
-        run: mvn process-resources -q -Pproxy-de -Dcommit=$GIT_COMMIT -Dbranch=$GIT_BRANCH -Dauthor=$AUTHOR_EMAIL
+        run: mvn process-resources -q -Pproxy_de -Dcommit=$GIT_COMMIT -Dbranch=$GIT_BRANCH -Dauthor=$AUTHOR_EMAIL
 
     # Maven Package & Upload Apigee Budle Config in Apigee
       - name: mvn config
-        run: mvn apigee-enterprise:configure -q -Pproxy-de -Dorg=esi-apigee-x-394004 -Denv=eval  -Ddeployment.suffix=$APIGEE_DEPLOYMENT_SUFFIX
+        run: mvn apigee-enterprise:configure -q -Pproxy_de -Dorg=esi-apigee-x-394004 -Denv=eval  -Ddeployment.suffix=$APIGEE_DEPLOYMENT_SUFFIX
 
     # Maven Deploy uploaded proxy package in to Apigeee
       - name: mvn deploy proxy xhybrid
-        run: mvn apigee-enterprise:deploy -q -Pproxy-de -Denv=eval -Dbearer=${{ steps.auth.outputs.access_token }}  -Dapigee.org=${{
-          github.event.inputs.deployment-region }} -Denv=${{github.event.inputs.deployment-env}}
+        run: mvn apigee-enterprise:deploy -q -Pproxy_de -Denv=eval -Dbearer=${{ steps.auth.outputs.access_token }} -Dorg=esi-apigee-x-394004
 
     # # Maven Deploy Apigee Config
     #   - name: mvn deploy config xhybrid
