@@ -35,7 +35,6 @@
         <profile>
             <id>proxy_de</id>
             <properties>
-                <apigee.profile>proxy_de</apigee.profile>
                 <apigee.hosturl>https://apigee.googleapis.com</apigee.hosturl>
                 <apigee.apiversion>v1</apigee.apiversion>
                 <apigee.apitype>sharedflow</apigee.apitype>
