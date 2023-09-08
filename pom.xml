@@ -31,7 +31,7 @@
         <target.root.dir>${basedir}/target</target.root.dir>
         <apigee.deploy.version>2.4.1</apigee.deploy.version>
     </properties>
-<!--     <profiles>
+<!-- <!--     <profiles>
         <profile>
             <id>proxy_de</id>
             <properties>
@@ -45,7 +45,7 @@
                 <apigee.bearer>${bearer}</apigee.bearer>
             </properties>
         </profile> -->
-    </profiles>
+    </profiles> -->
     <build>
         <pluginManagement>
             <plugins>
