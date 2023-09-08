@@ -81,7 +81,7 @@ jobs:
 
      # Maven Package & Upload Apigee proxy
       - name: mvn package
-        run: mvn process-resources -q -P  -Dcommit=$GIT_COMMIT -Dbranch=$GIT_BRANCH -Dauthor=$AUTHOR_EMAIL
+        run: mvn process-resources -q -Peval  -Dcommit=$GIT_COMMIT -Dbranch=$GIT_BRANCH -Dauthor=$AUTHOR_EMAIL
 
     # Maven Package & Upload Apigee Budle Config in Apigee
       - name: mvn config
