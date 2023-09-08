@@ -89,7 +89,8 @@ jobs:
 
     # Maven Deploy uploaded proxy package in to Apigeee
       - name: mvn deploy proxy xhybrid
-        run: mvn apigee-enterprise:deploy -q -P   -Denv=eval -Dbearer=${{ steps.auth.outputs.access_token }} -Dorg=esi-apigee-x-394004
+        run: mvn apigee-enterprise:deploy -q -P   -Denv=eval -Dbearer=${{ steps.auth.outputs.access_token }} -Dapigee.org=${{
+          github.event.inputs.deployment-region }} -Denv=${{github.event.inputs.deployment-env}}  -Dapigee.apitype==${{github.event.inputs.deployment-apitype}}
 
     # # Maven Deploy Apigee Config
     #   - name: mvn deploy config xhybrid
